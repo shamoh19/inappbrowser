@@ -790,7 +790,11 @@ public class InAppBrowser extends CordovaPlugin {
                 }
                 dialog.setCancelable(true);
                 dialog.setInAppBroswer(getInAppBrowser());
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    dialog.getWindow().setStatusBarColor(Color.TRANSPARENT);
+                    dialog.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+                }
                 // Main container layout
                 LinearLayout main = new LinearLayout(cordova.getActivity());
                 main.setOrientation(LinearLayout.VERTICAL);
