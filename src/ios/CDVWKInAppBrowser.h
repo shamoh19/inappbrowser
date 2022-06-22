@@ -26,7 +26,7 @@
 
 @class CDVWKInAppBrowserViewController;
 
-@interface CDVWKInAppBrowser : CDVPlugin {
+@interface CDVWKInAppBrowser : CDVPlugin <UIScrollViewDelegate> {
     UIWindow * tmpWindow;
 
     @private

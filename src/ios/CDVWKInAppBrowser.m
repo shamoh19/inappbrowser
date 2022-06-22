@@ -248,6 +248,12 @@ static CDVWKInAppBrowser* instance = nil;
             }
         }
     }
+
+    // prevent keyboard from pushing WKWebView on IDP
+    if(browserOptions.scrollwebview == NO) {
+        self.inAppBrowserViewController.webView.scrollView.scrollEnabled = NO;
+        self.inAppBrowserViewController.webView.scrollView.delegate = self;
+    }
     
     // use of beforeload event
     if([browserOptions.beforeload isKindOfClass:[NSString class]]){
@@ -261,6 +267,10 @@ static CDVWKInAppBrowser* instance = nil;
     if (!browserOptions.hidden) {
         [self show:nil withNoAnimate:browserOptions.hidden];
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    scrollView.bounds = self.inAppBrowserViewController.webView.bounds;
 }
 
 - (void)show:(CDVInvokedUrlCommand*)command{
